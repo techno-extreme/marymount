@@ -15,8 +15,44 @@ p {
   font-family: "Raleway", Helvetica, Arial, sans-serif;
 }
 
+.gotop {
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  background: #1e7145;
+  bottom: 40px;
+  right: 50px;
+
+  text-decoration: none;
+  text-align: center; 
+  line-height: 50px;
+  color: white;
+  font-size: 22px;
+}
+
 .img_align {
-  margin-left: 320px
+  width: 1005px;
+  height: 753px;
+}
+
+#myBtn {
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 20px; /* Place the button at the bottom of the page */
+  right: 30px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: red; /* Set a background color */
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 15px; /* Some padding */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 18px; /* Increase font size */
+}
+
+#myBtn:hover {
+  background-color: #555; /* Add a dark-grey background on hover */
 }
 
 h1 {
