@@ -1,6 +1,6 @@
 jQuery(document).ready(function($) {
   "use strict";
-
+  
   //Contact
   $('form.contactForm').submit(function() {
     var f = $(this).find('.form-group'),
