@@ -1,6 +1,28 @@
+import { url } from "inspector";
 
 $(document).ready(function() {
 
+  $('#contact-form').submit({ function(e){
+    var name = getElementById('inputName'),
+    email = getElementById('inputEmail'),
+    message = getElementById('inputMessage');
+    subject = getElementById('inputSubject');
+
+    if(!name.value || !email.value || !message.value){
+      alert('Please check your entries.');
+    }else{
+      $.ajax({
+        url: "https://formspree.io/tonderaimuchada@gmail.com",
+        method: "POST",
+        data: $(this).serialize(),
+        dataType: "json"
+      });
+      e.preventDefault();
+      $(this).get(0).reset();
+      alert('Message sent!')
+    }
+  }
+  })
   // Smooth scrolling
   $(function() {
     $('a[href*="#"]:not([href="#"])').click(function() {
