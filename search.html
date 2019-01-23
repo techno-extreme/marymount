@@ -12,19 +12,11 @@
 	<body>
 		<div>
 			<iframe id="myframe" style="display: none;"></iframe>
-			<p id="result">Indexing results go here (in JSON format)</p>
-			<button onclick="indexit()">Index it</button>
 		</div>
 		<div>
-			<input placeholder="input a word" id="searchinput">
+			<input placeholder="Input a word(in small letters)" id="searchinput">
 			<button onclick="indexAndSearch()">Search</button>
-			<p id="searchresult">Search results...</p>
-		</div>
-		<div>
-			<h1>Note on how to use it:</h1>
-			<p>By clicking "Index it" button, JavaScript will collect and read html files as defined on this script then store it in temporary variable. As the result, stringified object of this index data will appear.</p>
-			<p>I've divided below text into 4 parts, each in single html page, respectively named 1.html, 2.html, 3.html and 4.html. Input some word from this text to search it. After clicking search button, the search result will appear below search input. Also you can click on search result and you will redirected to that page contains the result. Here is the complete text:</p>
-			<p style="color: blue">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			<p id="searchresult"></p>
 		</div>
 		<script>
 			
@@ -39,9 +31,8 @@
 			
 			function indexit(){
 				if(currentPage <= lastPage){
-                    document.getElementById("result").innerHTML = "Searching...";
                     if(currentPage == 1){
-                        document.getElementById("myframe").src = "index" + ".html";
+                        document.getElementById("myframe").src = "#";
                     }else if(currentPage == 2){
                         document.getElementById("myframe").src = "e-books" + ".html";
                     }else{
@@ -88,7 +79,6 @@
 						currentPage++;
 						indexit();
                     };
-                    document.getElementById("searchresult").innerHTML = ""
 				} else setTimeout(function(){ 
 					//document.getElementById("result").innerHTML = JSON.stringify(content); 
 					indexingFinished = true;
@@ -96,14 +86,13 @@
 			}
 			
 			function search(){
-				document.getElementById("searchresult").innerHTML = "Searching..."
 				var sinput = document.getElementById("searchinput").value;
 				if(content.length > 0){
 					var tempContent = "";
 					var resultCount = 0;
 					for(var i = 0; i < content.length; i ++){
 						if(content[i].content.indexOf(sinput) > -1){
-							tempContent += "Result found on: <a href='"+content[i].address.split("/").pop()+"'>Page: " + content[i].address.split("/").pop().split(".")[0] + "</a><br />";
+							tempContent += "Result found on Page: <a href='"+content[i].address.split("/").pop()+"'>" + content[i].address.split("/").pop().split(".")[0] + ".html" + "</a><br />";
 							resultCount += 1;
 						}
 					}
@@ -114,7 +103,6 @@
 					content = [];
 					currentPage = firstPage;
                 } else document.getElementById("searchresult").innerHTML = "No index data."
-                document.getElementById("searchresult").innerHTML = ""
 			}
 			
 			function indexAndSearch(){
