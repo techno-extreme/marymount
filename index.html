@@ -41,9 +41,6 @@
 </head>
 
 <body>
-  <!-- Page Content
-    ================================================== -->
-  <!-- Hero -->
   <a class="gotop" href="#"><i class="fas fa-arrow-circle-up"></i></a>
   <section class="hero">
     <div class="container text-center">
@@ -63,9 +60,111 @@
     </div>
 
   </section>
-  <!-- /Hero -->
+  <script>
+    var firstPage = 1;
+    var lastPage = 3;
+    var multivol = false;
 
-  <!-- Header -->
+    var indexingFinished = false;
+    var currentPage = firstPage;
+    var manualpages = [];
+    var content = [];
+
+    function indexit() {
+      if (currentPage <= lastPage) {
+        if (currentPage == 1) {
+          document.getElementById("myframe").src = "#";
+        } else if (currentPage == 2) {
+          document.getElementById("myframe").src = "e-books" + ".html";
+        } else {
+          document.getElementById("myframe").src = "events" + ".html";
+        }
+
+        document.getElementById("myframe").onload = function () {
+          var dW = document.getElementById("myframe").contentWindow;
+          var dD = document.getElementById("myframe").contentDocument;
+          var dDContent = "";
+          for (var s = 0; s < dD.getElementsByTagName("p").length; s++) {
+            var tempString = dD.getElementsByTagName("p")[s].innerHTML;
+            dDContent += tempString + " ";
+          }
+          for (var s = 0; s < dD.getElementsByTagName("h1").length; s++) {
+            var tempString = dD.getElementsByTagName("h1")[s].innerHTML;
+            dDContent += tempString + " ";
+          }
+          for (var s = 0; s < dD.getElementsByTagName("a").length; s++) {
+            var tempString = dD.getElementsByTagName("a")[s].innerHTML;
+            dDContent += tempString + " ";
+          }
+          for (var s = 0; s < dD.getElementsByTagName("h2").length; s++) {
+            var tempString = dD.getElementsByTagName("h2")[s].innerHTML;
+            dDContent += tempString + " ";
+          }
+          for (var s = 0; s < dD.getElementsByTagName("div").length; s++) {
+            var tempString = dD.getElementsByTagName("div")[s].innerHTML;
+            dDContent += tempString + " ";
+          }
+          for (var s = 0; s < dD.getElementsByTagName("h3").length; s++) {
+            var tempString = dD.getElementsByTagName("h3")[s].innerHTML;
+            dDContent += tempString + " ";
+          }
+          for (var s = 0; s < dD.getElementsByTagName("span").length; s++) {
+            var tempString = dD.getElementsByTagName("span")[s].innerHTML;
+            dDContent += tempString + " ";
+          }
+          for (var s = 0; s < dD.getElementsByTagName("button").length; s++) {
+            var tempString = dD.getElementsByTagName("button")[s].innerHTML;
+            dDContent += tempString + " ";
+          }
+          content.push({ address: dW.location.href, content: dDContent.toLowerCase() });
+          currentPage++;
+          indexit();
+        };
+      } else setTimeout(function () {
+        //document.getElementById("result").innerHTML = JSON.stringify(content); 
+        indexingFinished = true;
+      }, 100)
+    }
+
+    function search() {
+      var sinput = document.getElementById("searchinput").value;
+      if (content.length > 0) {
+        var tempContent = "";
+        var resultCount = 0;
+        for (var i = 0; i < content.length; i++) {
+          if (content[i].content.indexOf(sinput) > -1) {
+            tempContent += "Result found on Page: <a href='" + content[i].address.split("/").pop() + "'>" + content[i].address.split("/").pop().split(".")[0] + ".html" + "</a><br />";
+            resultCount += 1;
+          }
+        }
+        if (resultCount == 0) tempContent = "No result found.";
+        document.getElementById("searchresult").innerHTML = tempContent;
+
+        //reset indexer
+        content = [];
+        currentPage = firstPage;
+      } else document.getElementById("searchresult").innerHTML = "No index data."
+    }
+
+    function indexAndSearch() {
+      indexit();
+      var tempTimer = setInterval(function () {
+        if (indexingFinished) {
+          search();
+          indexingFinished = false;
+          clearInterval(tempTimer);
+        }
+      }, 100)
+    }
+  </script>
+  <div>
+    <iframe id="myframe" style="display: none;"></iframe>
+  </div>
+  <div>
+    <input placeholder="Input a word(in small letters)" id="searchinput">
+    <button onclick="indexAndSearch()">Search</button>
+    <p id="searchresult"></p>
+  </div>
   <header id="header">
     <div class="container">
 
@@ -758,6 +857,104 @@
 
   <script src="contactform/contactform.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+  <script>
+
+    var firstPage = 1;
+    var lastPage = 3;
+    var multivol = false;
+
+    var indexingFinished = false;
+    var currentPage = firstPage;
+    var manualpages = [];
+    var content = [];
+
+    function indexit() {
+      if (currentPage <= lastPage) {
+        if (currentPage == 1) {
+          document.getElementById("myframe").src = "index" + ".html";
+        } else if (currentPage == 2) {
+          document.getElementById("myframe").src = "e-books" + ".html";
+        } else {
+          document.getElementById("myframe").src = "events" + ".html";
+        }
+
+        document.getElementById("myframe").onload = function () {
+          var dW = document.getElementById("myframe").contentWindow;
+          var dD = document.getElementById("myframe").contentDocument;
+          var dDContent = "";
+          for (var s = 0; s < dD.getElementsByTagName("p").length; s++) {
+            var tempString = dD.getElementsByTagName("p")[s].innerHTML;
+            dDContent += tempString + " ";
+          }
+          for (var s = 0; s < dD.getElementsByTagName("h1").length; s++) {
+            var tempString = dD.getElementsByTagName("h1")[s].innerHTML;
+            dDContent += tempString + " ";
+          }
+          for (var s = 0; s < dD.getElementsByTagName("a").length; s++) {
+            var tempString = dD.getElementsByTagName("a")[s].innerHTML;
+            dDContent += tempString + " ";
+          }
+          for (var s = 0; s < dD.getElementsByTagName("h2").length; s++) {
+            var tempString = dD.getElementsByTagName("h2")[s].innerHTML;
+            dDContent += tempString + " ";
+          }
+          for (var s = 0; s < dD.getElementsByTagName("div").length; s++) {
+            var tempString = dD.getElementsByTagName("div")[s].innerHTML;
+            dDContent += tempString + " ";
+          }
+          for (var s = 0; s < dD.getElementsByTagName("h3").length; s++) {
+            var tempString = dD.getElementsByTagName("h3")[s].innerHTML;
+            dDContent += tempString + " ";
+          }
+          for (var s = 0; s < dD.getElementsByTagName("span").length; s++) {
+            var tempString = dD.getElementsByTagName("span")[s].innerHTML;
+            dDContent += tempString + " ";
+          }
+          for (var s = 0; s < dD.getElementsByTagName("button").length; s++) {
+            var tempString = dD.getElementsByTagName("button")[s].innerHTML;
+            dDContent += tempString + " ";
+          }
+          content.push({ address: dW.location.href, content: dDContent.toLowerCase() });
+          currentPage++;
+          indexit();
+        };
+      } else setTimeout(function () {
+        //document.getElementById("result").innerHTML = JSON.stringify(content); 
+        indexingFinished = true;
+      }, 100)
+    }
+
+    function search() {
+      var sinput = document.getElementById("searchinput").value;
+      if (content.length > 0) {
+        var tempContent = "";
+        var resultCount = 0;
+        for (var i = 0; i < content.length; i++) {
+          if (content[i].content.indexOf(sinput) > -1) {
+            tempContent += "Result found on Page: <a href='" + content[i].address.split("/").pop() + "'>" + content[i].address.split("/").pop().split(".")[0] + ".html" + "</a><br />";
+            resultCount += 1;
+          }
+        }
+        if (resultCount == 0) tempContent = "No result found.";
+        document.getElementById("searchresult").innerHTML = tempContent;
+
+        //reset indexer
+        content = [];
+        currentPage = firstPage;
+      } else document.getElementById("searchresult").innerHTML = "No index data."
+    }
+
+    function indexAndSearch() {
+      indexit();
+      var tempTimer = setInterval(function () {
+        if (indexingFinished) {
+          search();
+          indexingFinished = false;
+          clearInterval(tempTimer);
+        }
+      }, 100)
+    }
+  </script>
 </body>
 
 </html>
